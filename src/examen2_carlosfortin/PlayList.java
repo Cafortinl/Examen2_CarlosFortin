@@ -1,12 +1,13 @@
 package examen2_carlosfortin;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Carlos Fortin
  */
-public class PlayList {
+public class PlayList implements Serializable{
     private ArrayList<Video> videos=new ArrayList();
     private int duracion;
 

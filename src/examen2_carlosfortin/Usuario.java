@@ -1,20 +1,22 @@
 package examen2_carlosfortin;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Carlos Fortin
  */
-public class Usuario {
+public class Usuario implements Serializable{
     private String nombre;
     private int edad;
     private String correo;
     private String usuario;
     private Canal canal;
     private String password;
-    private ArrayList<Canal> suscripciones=new ArrayList();
-    private ArrayList<Video> favoritos=new ArrayList();
+    private ArrayList<Canal> subscripciones=new ArrayList();
+    private PlayList favoritos;
+    
 
     public Usuario() {
     }
@@ -26,6 +28,8 @@ public class Usuario {
         this.usuario = usuario;
         this.canal = canal;
         this.password = password;
+        this.subscripciones=new ArrayList();
+        this.favoritos=new PlayList();
     }
 
     public String getNombre() {
@@ -77,19 +81,23 @@ public class Usuario {
     }
 
     public ArrayList<Canal> getSuscripciones() {
-        return suscripciones;
+        return subscripciones;
     }
 
-    public void setSuscripciones(ArrayList<Canal> suscripciones) {
-        this.suscripciones = suscripciones;
+    public void setSubscripciones(ArrayList<Canal> suscripciones) {
+        this.subscripciones = suscripciones;
     }
 
-    public ArrayList<Video> getFavoritos() {
+    public PlayList getFavoritos() {
         return favoritos;
     }
 
-    public void setFavoritos(ArrayList<Video> favoritos) {
+    public void setFavoritos(PlayList favoritos) {
         this.favoritos = favoritos;
+    }
+    
+    public void setFavorito(Video video){
+        this.favoritos.getVideos().add(video);
     }
 
     @Override

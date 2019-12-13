@@ -1,27 +1,46 @@
 package examen2_carlosfortin;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Carlos Fortin
  */
-public class Video {
+public class Video implements Serializable{
     private String nombre;
     private int tiempo;
-    private int likes;
-    private int dislikes;
+    private ArrayList<Usuario> likes=new ArrayList();
+    private ArrayList<Usuario> dislikes=new ArrayList();
     private ArrayList<String> comentarios=new ArrayList();
     private ArrayList<String> subtitulos=new ArrayList();
 
     public Video() {
     }
 
-    public Video(String nombre, int tiempo, int likes, int dislikes) {
-        this.nombre = nombre;
-        this.tiempo = tiempo;
-        this.likes = likes;
-        this.dislikes = dislikes;
+    public Video(String nombre, int tiempo, String subtitulos) {
+        int cont=0;
+        Scanner leer=new Scanner(subtitulos);
+        leer.useDelimiter(";");
+        while(leer.hasNext()){
+            cont++;
+        }
+        
+        if(((int)tiempo/10)==cont){
+            this.nombre = nombre;
+            this.tiempo = tiempo;
+            this.likes = new ArrayList();
+            this.dislikes = new ArrayList();
+            this.comentarios=new ArrayList();
+            leer=new Scanner(subtitulos);
+            leer.useDelimiter(";");
+            while(leer.hasNext()){
+                this.subtitulos.add(leer.next());
+            }
+        }else{
+        }
     }
 
     public String getNombre() {
@@ -41,18 +60,18 @@ public class Video {
     }
 
     public int getLikes() {
-        return likes;
+        return this.likes.size();
     }
 
-    public void setLikes(int likes) {
+    public void setLikes(ArrayList likes) {
         this.likes = likes;
     }
 
     public int getDislikes() {
-        return dislikes;
+        return this.dislikes.size();
     }
 
-    public void setDislikes(int dislikes) {
+    public void setDislikes(ArrayList dislikes) {
         this.dislikes = dislikes;
     }
 

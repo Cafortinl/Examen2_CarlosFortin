@@ -1,12 +1,13 @@
 package examen2_carlosfortin;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Carlos Fortin
  */
-public class Canal {
+public class Canal implements Serializable{
     private int no_sus;
     private String nombre;
     private String categoria;
@@ -17,12 +18,13 @@ public class Canal {
     public Canal() {
     }
 
-    public Canal(int no_sus, String nombre, String categoria, int no_vid, int likes) {
-        this.no_sus = no_sus;
+    public Canal(String nombre, String categoria) {
+        this.no_sus = 0;
         this.nombre = nombre;
         this.categoria = categoria;
-        this.no_vid = no_vid;
-        this.likes = likes;
+        this.no_vid = 0;
+        this.likes = 0;
+        this.videos=new ArrayList();
     }
 
     public int getNo_sus() {
