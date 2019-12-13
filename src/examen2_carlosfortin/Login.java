@@ -8,6 +8,8 @@ package examen2_carlosfortin;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -85,6 +87,10 @@ public class Login extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        pop_reproducir = new javax.swing.JPopupMenu();
+        reproducir = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -222,6 +228,11 @@ public class Login extends javax.swing.JFrame {
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Categorias");
         jt_suscripciones.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jt_suscripciones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jt_suscripcionesMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jt_suscripciones);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -379,6 +390,11 @@ public class Login extends javax.swing.JFrame {
         jScrollPane3.setViewportView(Tabla_buscarCanales);
 
         jButton6.setText("Suscribirse");
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton6MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -508,6 +524,27 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(tab, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(19, Short.MAX_VALUE))
         );
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane5.setViewportView(jTable1);
+
+        reproducir.setText("Reproducir");
+        reproducir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reproducirActionPerformed(evt);
+            }
+        });
+        pop_reproducir.add(reproducir);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -658,6 +695,7 @@ public class Login extends javax.swing.JFrame {
             jd_menu.setVisible(true);
             jd_menu.pack();
             jd_menu.setLocationRelativeTo(this);
+            actualizarArbol();
             JOptionPane.showMessageDialog(jd_menu, "Se ha ingresado con exito!");
         }else{
             JOptionPane.showMessageDialog(this, "Usuario o password incorrecta");
@@ -686,6 +724,8 @@ public class Login extends javax.swing.JFrame {
                 actual.getCanal().getVideos().get(actual.getCanal().getVideos().size()-1).setSubtitulos(subtitulos);
                 actualizarTablaMisVideos();
                 au.escribirArchivo();
+            }else{
+                JOptionPane.showMessageDialog(jd_menu, "No se pudo crear video, los subtitulos no estan sincronizados");
             }
         }
         
@@ -711,6 +751,49 @@ public class Login extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_tabStateChanged
+
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+        if(Tabla_buscarCanales.getSelectedRow()>=0){
+            String nom=Tabla_buscarCanales.getValueAt(Tabla_buscarCanales.getSelectedRow(), 0).toString();
+            for (Usuario u : au.getUsuarios()) {
+                if(u.getCanal().getNombre().equals(nom)){
+                    temporal=u;
+                }
+            }
+            
+            if(temporal!=null){
+                actual.getSuscripciones().add(temporal.getCanal());
+                actualizarArbol();
+                actualizarTablaBuscarCanales();
+                au.escribirArchivo();
+            }
+            
+        }
+    }//GEN-LAST:event_jButton6MouseClicked
+
+    private void jt_suscripcionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_suscripcionesMouseClicked
+        if(evt.isMetaDown()){
+            int row=jt_suscripciones.getClosestRowForLocation(evt.getX(), evt.getY());
+            jt_suscripciones.setSelectionRow(row);
+            Object v1=jt_suscripciones.getSelectionPath().getLastPathComponent();
+            seleccionado=(DefaultMutableTreeNode)v1;
+            if(seleccionado.getUserObject() instanceof Video){
+                repro=(Video)seleccionado.getUserObject();
+                pop_reproducir.show(evt.getComponent(),evt.getX(),evt.getY());
+            }
+            /*else if(nodo_seleccionado.getUserObject()!="Personas"){
+                opcion_edad.setEnabled(false);
+                opcion_eliminar.setEnabled(false);
+                opcion_modificar.setEnabled(false);
+                opcion_elimnacionalidad.setEnabled(true);
+                menu_popup.show(evt.getComponent(),evt.getX(),evt.getY());
+            }*/
+        }
+    }//GEN-LAST:event_jt_suscripcionesMouseClicked
+
+    private void reproducirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reproducirActionPerformed
+        
+    }//GEN-LAST:event_reproducirActionPerformed
 
     public void actualizarTablaMisVideos(){
         Tabla_misvideos.setModel(new javax.swing.table.DefaultTableModel(
@@ -782,6 +865,69 @@ public class Login extends javax.swing.JFrame {
             
         }
         Tabla_buscarCanales.setModel(m);
+    }
+    
+    public void actualizarArbol(){
+        if(actual!=null){
+            DefaultTreeModel m=(DefaultTreeModel)jt_suscripciones.getModel();
+            root=(DefaultMutableTreeNode)m.getRoot();
+            DefaultMutableTreeNode categ=null;
+            
+            for (Canal s : actual.getSuscripciones()) {
+                if(root.getChildCount()==0){
+                    categ=new DefaultMutableTreeNode(s.getCategoria());
+                    DefaultMutableTreeNode canal=new DefaultMutableTreeNode(s);
+                    if(s.getVideos().isEmpty()){
+                    }else{
+                        for (Video v : s.getVideos()) {
+                            DefaultMutableTreeNode vid=new DefaultMutableTreeNode(v);
+                            canal.add(vid);
+                        }
+                    }
+                    categ.add(canal);
+                    root.add(categ);
+                }else{
+                    boolean x=true;
+                    int pos=0;
+                    for (int i=0;i<root.getChildCount();i++) {
+                        if(s.getCategoria().equals(root.getChildAt(i).toString())){
+                            x=false;
+                            System.out.println("false");
+                            pos=i;
+                            break;
+                        }
+                    }
+                    
+                    if(x){
+                        categ=new DefaultMutableTreeNode(s.getCategoria());
+                        DefaultMutableTreeNode canal=new DefaultMutableTreeNode(s);
+                        if(s.getVideos().isEmpty()){
+                        }else{
+                            for (Video v : s.getVideos()) {
+                                DefaultMutableTreeNode vid=new DefaultMutableTreeNode(v);
+                                canal.add(vid);
+                            }
+                        }
+                        categ.add(canal);
+                        root.add(categ);
+                    }else{
+                        DefaultMutableTreeNode canal=new DefaultMutableTreeNode(s);
+                        categ=(DefaultMutableTreeNode)root.getChildAt(pos);
+                        if(s.getVideos().isEmpty()){
+                        }else{
+                            for (Video v : s.getVideos()) {
+                                DefaultMutableTreeNode vid=new DefaultMutableTreeNode(v);
+                                canal.add(vid);
+                            }
+                        }
+                        categ.add(canal);
+                        root.add(categ);
+                    }
+                    
+                }
+            }
+            
+        }
     }
     
     /**
@@ -863,6 +1009,8 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JTable jTable1;
     private javax.swing.JDialog jd_menu;
     private javax.swing.JDialog jd_registro;
     private javax.swing.JTree jt_suscripciones;
@@ -870,6 +1018,8 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel lb_sus;
     private javax.swing.JPasswordField pf_agrpassword;
     private javax.swing.JPasswordField pf_password;
+    private javax.swing.JPopupMenu pop_reproducir;
+    private javax.swing.JMenuItem reproducir;
     private javax.swing.JSpinner sp_agredad;
     private javax.swing.JSpinner sp_duracion;
     private javax.swing.JTextArea ta_subtitulos;
@@ -884,4 +1034,8 @@ public class Login extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     AdministrarUsuarios au=new AdministrarUsuarios("./usuarios.cafl");
     Usuario actual=null;
+    Usuario temporal=null;
+    Video repro=null;
+    DefaultMutableTreeNode root=null;
+    DefaultMutableTreeNode seleccionado=null;
 }

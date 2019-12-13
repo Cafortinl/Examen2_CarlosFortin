@@ -94,7 +94,7 @@ public class Video implements Serializable{
 
     @Override
     public String toString() {
-        return "Video{" + "nombre=" + nombre + ", tiempo=" + tiempo + '}';
+        return nombre+"-"+tiempo+" seg.";
     }
     
     
