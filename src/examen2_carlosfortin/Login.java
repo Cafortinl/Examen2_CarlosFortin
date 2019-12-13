@@ -5,6 +5,7 @@
  */
 package examen2_carlosfortin;
 
+import java.util.Scanner;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -67,8 +68,6 @@ public class Login extends javax.swing.JFrame {
         lb_nombre = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         lb_sus = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        lb_likes = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -213,6 +212,12 @@ public class Login extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel15.setText("YouLeoTube");
 
+        tab.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                tabStateChanged(evt);
+            }
+        });
+
         jLabel17.setText("Mis Suscripciones");
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Categorias");
@@ -260,10 +265,6 @@ public class Login extends javax.swing.JFrame {
 
         lb_sus.setText("lb_sus");
 
-        jLabel22.setText("No. likes:");
-
-        lb_likes.setText("lb_likes");
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -291,30 +292,22 @@ public class Login extends javax.swing.JFrame {
                                 .addComponent(lb_sus))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel20)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lb_nombre))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel22)
-                                .addGap(18, 18, 18)
-                                .addComponent(lb_likes)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lb_nombre)))))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(79, 79, 79)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
                     .addComponent(lb_nombre))
-                .addGap(29, 29, 29)
+                .addGap(43, 43, 43)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
                     .addComponent(lb_sus))
-                .addGap(37, 37, 37)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel22)
-                    .addComponent(lb_likes))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -678,20 +671,46 @@ public class Login extends javax.swing.JFrame {
     private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
         if(tf_nombrevideo.getText().isEmpty() || ta_subtitulos.getText().isEmpty()){
         }else{
+            //int cont=0;
             String nombre=tf_nombrevideo.getText();
             int duracion=(int)sp_duracion.getValue();
-            String subtitulos=ta_subtitulos.getText();
+            String subtitulos=ta_subtitulos.getText()+";";
+            int nosub=duracion/10;
             
-            actual.getCanal().getVideos().add(new Video(nombre, duracion, subtitulos));
-            actualizarTablaMisVideos();
-            au.escribirArchivo();
+            String[] sub=subtitulos.split(";");
+            System.out.println(nosub+" "+sub.length);
+            
+            if(nosub==sub.length){
+                actual.getCanal().getVideos().add(new Video(nombre));
+                actual.getCanal().getVideos().get(actual.getCanal().getVideos().size()-1).setTiempo(duracion);
+                actual.getCanal().getVideos().get(actual.getCanal().getVideos().size()-1).setSubtitulos(subtitulos);
+                actualizarTablaMisVideos();
+                au.escribirArchivo();
+            }
         }
         
         tf_nombrevideo.setText("");
-        sp_duracion.setValue(sp_duracion.getMinimumSize());
+        sp_duracion.setValue(10);
         ta_subtitulos.setText("");
         
     }//GEN-LAST:event_jButton7MouseClicked
+
+    private void tabStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabStateChanged
+        if(tab.getSelectedIndex()==0){
+            if(actual!=null){
+                lb_nombre.setText(actual.getCanal().getNombre());
+                lb_sus.setText(Integer.toString(actual.getCanal().getNo_sus()));
+                actualizarTablaMisVideos();
+            }
+        }
+        if(tab.getSelectedIndex()==1){
+            if(actual!=null)
+                actualizarTablaBuscarCanales();
+        }
+        if(tab.getSelectedIndex()==2){
+            
+        }
+    }//GEN-LAST:event_tabStateChanged
 
     public void actualizarTablaMisVideos(){
         Tabla_misvideos.setModel(new javax.swing.table.DefaultTableModel(
@@ -723,6 +742,46 @@ public class Login extends javax.swing.JFrame {
             m.addRow(info);
         }
         Tabla_misvideos.setModel(m);
+    }
+    
+    public void actualizarTablaBuscarCanales(){
+        Tabla_buscarCanales.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "Contenido", "Suscriptores"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        DefaultTableModel m=(DefaultTableModel)Tabla_buscarCanales.getModel();
+        for (Usuario u : au.getUsuarios()) {
+            boolean x=true;
+            if(actual.getSuscripciones().contains(u.getCanal()) || actual.equals(u)){
+                x=false;
+            }
+            
+            if(x){
+                Object[] info={u.getCanal().getNombre(),u.getCanal().getCategoria(),u.getCanal().getNo_sus()};
+                m.addRow(info);
+            }
+            
+        }
+        Tabla_buscarCanales.setModel(m);
     }
     
     /**
@@ -784,7 +843,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -808,7 +866,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JDialog jd_menu;
     private javax.swing.JDialog jd_registro;
     private javax.swing.JTree jt_suscripciones;
-    private javax.swing.JLabel lb_likes;
     private javax.swing.JLabel lb_nombre;
     private javax.swing.JLabel lb_sus;
     private javax.swing.JPasswordField pf_agrpassword;

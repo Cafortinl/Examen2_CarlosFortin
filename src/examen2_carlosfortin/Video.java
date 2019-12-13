@@ -20,26 +20,23 @@ public class Video implements Serializable{
     public Video() {
     }
 
+    public Video(String nombre){
+        this.nombre=nombre;
+        this.likes = new ArrayList();
+        this.dislikes = new ArrayList();
+        this.comentarios=new ArrayList();
+    }
+    
     public Video(String nombre, int tiempo, String subtitulos) {
-        int cont=0;
+        this.nombre = nombre;
+        this.tiempo = tiempo;
+        this.likes = new ArrayList();
+        this.dislikes = new ArrayList();
+        this.comentarios=new ArrayList();
         Scanner leer=new Scanner(subtitulos);
         leer.useDelimiter(";");
         while(leer.hasNext()){
-            cont++;
-        }
-        
-        if(((int)tiempo/10)==cont){
-            this.nombre = nombre;
-            this.tiempo = tiempo;
-            this.likes = new ArrayList();
-            this.dislikes = new ArrayList();
-            this.comentarios=new ArrayList();
-            leer=new Scanner(subtitulos);
-            leer.useDelimiter(";");
-            while(leer.hasNext()){
-                this.subtitulos.add(leer.next());
-            }
-        }else{
+            this.subtitulos.add(leer.next());
         }
     }
 
@@ -87,8 +84,12 @@ public class Video implements Serializable{
         return subtitulos;
     }
 
-    public void setSubtitulos(ArrayList<String> subtitulos) {
-        this.subtitulos = subtitulos;
+    public void setSubtitulos(String subtitulos) {
+        Scanner leer=new Scanner(subtitulos);
+        leer.useDelimiter(";");
+        while(leer.hasNext()){
+            this.subtitulos.add(leer.next());
+        }
     }
 
     @Override
