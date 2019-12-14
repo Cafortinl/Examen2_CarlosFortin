@@ -573,6 +573,11 @@ public class Login extends javax.swing.JFrame {
         });
 
         jButton9.setText("Dislike");
+        jButton9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton9MouseClicked(evt);
+            }
+        });
 
         Tabla_comentarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -611,6 +616,11 @@ public class Login extends javax.swing.JFrame {
         });
 
         jButton11.setText("Agregar a Favoritos");
+        jButton11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton11MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jd_reproducirVideoLayout = new javax.swing.GroupLayout(jd_reproducirVideo.getContentPane());
         jd_reproducirVideo.getContentPane().setLayout(jd_reproducirVideoLayout);
@@ -892,13 +902,6 @@ public class Login extends javax.swing.JFrame {
                 repro=(Video)seleccionado.getUserObject();
                 pop_reproducir.show(evt.getComponent(),evt.getX(),evt.getY());
             }
-            /*else if(nodo_seleccionado.getUserObject()!="Personas"){
-                opcion_edad.setEnabled(false);
-                opcion_eliminar.setEnabled(false);
-                opcion_modificar.setEnabled(false);
-                opcion_elimnacionalidad.setEnabled(true);
-                menu_popup.show(evt.getComponent(),evt.getX(),evt.getY());
-            }*/
         }
     }//GEN-LAST:event_jt_suscripcionesMouseClicked
 
@@ -924,8 +927,29 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(jd_reproducirVideo, "Ya le diste like a este video");
         }else{
             repro.getLikes().add(actual);
+            if(repro.getDislikes().contains(actual))
+                repro.getDislikes().remove(actual);
         }
     }//GEN-LAST:event_jButton8MouseClicked
+
+    private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
+        if(repro.getDislikes().contains(actual)){
+            JOptionPane.showMessageDialog(jd_reproducirVideo, "Ya le diste dislike a este video");
+        }else{
+            repro.getDislikes().add(actual);
+            if(repro.getLikes().contains(actual))
+                repro.getLikes().remove(actual);
+        }
+    }//GEN-LAST:event_jButton9MouseClicked
+
+    private void jButton11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseClicked
+        if(actual.getFavoritos().getVideos().contains(repro)){
+            JOptionPane.showMessageDialog(jd_reproducirVideo, "Este video ya esta en tus favoritos");
+        }else{
+            actual.getFavoritos().getVideos().add(repro);
+            JOptionPane.showMessageDialog(jd_reproducirVideo, "Video agregado exitosamente");
+        }
+    }//GEN-LAST:event_jButton11MouseClicked
 
     public void actualizarTablaMisVideos(){
         Tabla_misvideos.setModel(new javax.swing.table.DefaultTableModel(

@@ -789,6 +789,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Dislike"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton9MouseClicked"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane7">
           <AuxValues>
@@ -862,6 +865,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Agregar a Favoritos"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton11MouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
