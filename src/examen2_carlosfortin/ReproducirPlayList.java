@@ -81,7 +81,7 @@ public class ReproducirPlayList extends Thread{
             reproduccion.setMaximum(playlist.getDuracion());
             if(reproduccion.getValue()<reproduccion.getMaximum()){
                 if(cont<video.getTiempo()){
-                    if(cont%10==0 && reproduccion.getValue()/10<video.getSubtitulos().size()){
+                    if(cont%10==0 && cont/10<video.getSubtitulos().size()){
                         int pos=reproduccion.getValue()/10;
                         System.out.println(pos);
                         subtitulos.setText(video.getSubtitulos().get(pos));
@@ -94,7 +94,6 @@ public class ReproducirPlayList extends Thread{
                     } catch (Exception e) {
                     }
                 }else{
-                    
                     reproducidos.add(video);
                     actualizarTablaReproducciones();
                     subtitulos.setText("");
