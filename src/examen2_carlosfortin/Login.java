@@ -91,6 +91,19 @@ public class Login extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         pop_reproducir = new javax.swing.JPopupMenu();
         reproducir = new javax.swing.JMenuItem();
+        jd_reproducirVideo = new javax.swing.JDialog();
+        lb_nomVid = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        ta_subtitulosVid = new javax.swing.JTextArea();
+        pb_vid = new javax.swing.JProgressBar();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        Tabla_comentarios = new javax.swing.JTable();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        ta_comentarios = new javax.swing.JTextArea();
+        jButton10 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -546,6 +559,104 @@ public class Login extends javax.swing.JFrame {
         });
         pop_reproducir.add(reproducir);
 
+        lb_nomVid.setText("Nombre_Vid");
+
+        ta_subtitulosVid.setColumns(20);
+        ta_subtitulosVid.setRows(5);
+        jScrollPane6.setViewportView(ta_subtitulosVid);
+
+        jButton8.setText("Like");
+        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton8MouseClicked(evt);
+            }
+        });
+
+        jButton9.setText("Dislike");
+
+        Tabla_comentarios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Comentarios"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane7.setViewportView(Tabla_comentarios);
+
+        ta_comentarios.setColumns(20);
+        ta_comentarios.setRows(5);
+        jScrollPane8.setViewportView(ta_comentarios);
+
+        jButton10.setText("Enviar Comentario");
+        jButton10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton10MouseClicked(evt);
+            }
+        });
+
+        jButton11.setText("Agregar a Favoritos");
+
+        javax.swing.GroupLayout jd_reproducirVideoLayout = new javax.swing.GroupLayout(jd_reproducirVideo.getContentPane());
+        jd_reproducirVideo.getContentPane().setLayout(jd_reproducirVideoLayout);
+        jd_reproducirVideoLayout.setHorizontalGroup(
+            jd_reproducirVideoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_reproducirVideoLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(jd_reproducirVideoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton10)
+                    .addGroup(jd_reproducirVideoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jd_reproducirVideoLayout.createSequentialGroup()
+                            .addComponent(jButton8)
+                            .addGap(31, 31, 31)
+                            .addComponent(jButton9)
+                            .addGap(36, 36, 36)
+                            .addComponent(jButton11))
+                        .addComponent(lb_nomVid)
+                        .addComponent(jScrollPane6)
+                        .addComponent(pb_vid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 772, Short.MAX_VALUE)
+                        .addComponent(jScrollPane8)))
+                .addContainerGap(41, Short.MAX_VALUE))
+        );
+        jd_reproducirVideoLayout.setVerticalGroup(
+            jd_reproducirVideoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_reproducirVideoLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(lb_nomVid)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(pb_vid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addGroup(jd_reproducirVideoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton8)
+                    .addComponent(jButton9)
+                    .addComponent(jButton11))
+                .addGap(57, 57, 57)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton10)
+                .addContainerGap(43, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
@@ -792,8 +903,29 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jt_suscripcionesMouseClicked
 
     private void reproducirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reproducirActionPerformed
-        
+        rv=new ReproducirVideo(pb_vid, repro, ta_subtitulosVid);
+        jd_reproducirVideo.setVisible(true);
+        jd_reproducirVideo.pack();
+        jd_reproducirVideo.setLocationRelativeTo(jd_menu);
+        lb_nomVid.setText(repro.getNombre());
+        actualizarTablaComentarios();
+        rv.start();
     }//GEN-LAST:event_reproducirActionPerformed
+
+    private void jButton10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton10MouseClicked
+        String comentario=actual.getUsuario()+":"+ta_comentarios.getText();
+        repro.getComentarios().add(comentario);
+        actualizarTablaComentarios();
+        ta_comentarios.setText("");
+    }//GEN-LAST:event_jButton10MouseClicked
+
+    private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
+        if(repro.getLikes().contains(actual)){
+            JOptionPane.showMessageDialog(jd_reproducirVideo, "Ya le diste like a este video");
+        }else{
+            repro.getLikes().add(actual);
+        }
+    }//GEN-LAST:event_jButton8MouseClicked
 
     public void actualizarTablaMisVideos(){
         Tabla_misvideos.setModel(new javax.swing.table.DefaultTableModel(
@@ -869,6 +1001,8 @@ public class Login extends javax.swing.JFrame {
     
     public void actualizarArbol(){
         if(actual!=null){
+            javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Categorias");
+            jt_suscripciones.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
             DefaultTreeModel m=(DefaultTreeModel)jt_suscripciones.getModel();
             root=(DefaultMutableTreeNode)m.getRoot();
             DefaultMutableTreeNode categ=null;
@@ -930,6 +1064,47 @@ public class Login extends javax.swing.JFrame {
         }
     }
     
+    public void actualizarTablaComentarios(){
+        if(repro!=null){
+                
+            Tabla_comentarios.setModel(new javax.swing.table.DefaultTableModel(
+                new Object [][] {
+
+                },
+                new String [] {
+                    "Comentarios"
+                }
+            ) {
+                Class[] types = new Class [] {
+                    java.lang.String.class
+                };
+                boolean[] canEdit = new boolean [] {
+                    false
+                };
+
+                public Class getColumnClass(int columnIndex) {
+                    return types [columnIndex];
+                }
+
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit [columnIndex];
+                }
+            });
+            
+            if(repro.getComentarios().isEmpty()){
+                
+            }else{
+                DefaultTableModel m=(DefaultTableModel)Tabla_comentarios.getModel();
+                for (String c : repro.getComentarios()) {
+                    String[] info={c};
+                    m.addRow(info);
+                }
+                Tabla_comentarios.setModel(m);
+            }
+        }
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -967,14 +1142,19 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Tabla_buscarCanales;
+    private javax.swing.JTable Tabla_comentarios;
     private javax.swing.JTable Tabla_misvideos;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1010,19 +1190,27 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTable jTable1;
     private javax.swing.JDialog jd_menu;
     private javax.swing.JDialog jd_registro;
+    private javax.swing.JDialog jd_reproducirVideo;
     private javax.swing.JTree jt_suscripciones;
+    private javax.swing.JLabel lb_nomVid;
     private javax.swing.JLabel lb_nombre;
     private javax.swing.JLabel lb_sus;
+    private javax.swing.JProgressBar pb_vid;
     private javax.swing.JPasswordField pf_agrpassword;
     private javax.swing.JPasswordField pf_password;
     private javax.swing.JPopupMenu pop_reproducir;
     private javax.swing.JMenuItem reproducir;
     private javax.swing.JSpinner sp_agredad;
     private javax.swing.JSpinner sp_duracion;
+    private javax.swing.JTextArea ta_comentarios;
     private javax.swing.JTextArea ta_subtitulos;
+    private javax.swing.JTextArea ta_subtitulosVid;
     private javax.swing.JTabbedPane tab;
     private javax.swing.JTextField tf_agrcateg;
     private javax.swing.JTextField tf_agrcorreo;
@@ -1038,4 +1226,5 @@ public class Login extends javax.swing.JFrame {
     Video repro=null;
     DefaultMutableTreeNode root=null;
     DefaultMutableTreeNode seleccionado=null;
+    ReproducirVideo rv;
 }

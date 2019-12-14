@@ -56,7 +56,7 @@ public class Video implements Serializable{
         this.tiempo = tiempo;
     }
 
-    public int getLikes() {
+    public int getLikesInt() {
         return this.likes.size();
     }
 
@@ -64,7 +64,7 @@ public class Video implements Serializable{
         this.likes = likes;
     }
 
-    public int getDislikes() {
+    public int getDislikesInt() {
         return this.dislikes.size();
     }
 
@@ -84,11 +84,18 @@ public class Video implements Serializable{
         return subtitulos;
     }
 
+    public ArrayList<Usuario> getLikes() {
+        return likes;
+    }
+
+    public ArrayList<Usuario> getDislikes() {
+        return dislikes;
+    }
+
     public void setSubtitulos(String subtitulos) {
-        Scanner leer=new Scanner(subtitulos);
-        leer.useDelimiter(";");
-        while(leer.hasNext()){
-            this.subtitulos.add(leer.next());
+        String[] sub=subtitulos.split(";");
+        for(int i=0;i<=sub.length;i++){
+            this.subtitulos.add(sub[i]);
         }
     }
 
