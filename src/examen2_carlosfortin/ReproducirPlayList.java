@@ -78,34 +78,36 @@ public class ReproducirPlayList extends Thread{
     public void run(){
         Video video=playlist.getVideos().get(i);
         while(vive){
-            reproduccion.setMaximum(playlist.getDuracion());
-            if(reproduccion.getValue()<reproduccion.getMaximum()){
-                if(cont<video.getTiempo()){
-                    if(cont%10==0 && cont/10<video.getSubtitulos().size()){
+            if(cont<playlist.getDuracion()){
+                reproduccion.setMaximum(video.getTiempo());
+                if(reproduccion.getValue()<reproduccion.getMaximum()){
+                    if(reproduccion.getValue()%10==0 && reproduccion.getValue()/10<video.getSubtitulos().size()){
                         int pos=reproduccion.getValue()/10;
                         System.out.println(pos);
                         subtitulos.setText(video.getSubtitulos().get(pos));
                         System.out.println(video.getSubtitulos().get(pos));
                     }
-                    cont++;
                     reproduccion.setValue(reproduccion.getValue()+1);
+                    cont++;
                     try {
                         Thread.sleep(1000);
                     } catch (Exception e) {
                     }
                 }else{
+                    reproduccion.setValue(0);
+                    subtitulos.setText("");
                     reproducidos.add(video);
                     actualizarTablaReproducciones();
-                    subtitulos.setText("");
-                    cont=0;
                     i++;
-                    if(i<reproducidos.size()-1)
-                        video=playlist.getVideos().get(i);
+                    video=playlist.getVideos().get(i);
                 }
             }else{
                vive=false;
                reproduccion.setValue(0);
-            }
+               subtitulos.setText("");
+               reproducidos.add(video);
+               actualizarTablaReproducciones();
+            }   
         }
     }
     
@@ -115,14 +117,14 @@ public class ReproducirPlayList extends Thread{
 
             },
             new String [] {
-                "Reproducciones"
+                "Nombre", "Canal", "Duracion"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -136,7 +138,7 @@ public class ReproducirPlayList extends Thread{
         
         DefaultTableModel m=(DefaultTableModel)reproducciones.getModel();
         for (Video r : reproducidos) {
-            String[] info={r.getNombre(),};
+            Object[] info={r.getNombre(),r.getCanal().getNombre(),r.getTiempo()};
             m.addRow(info);
         }
         reproducciones.setModel(m);

@@ -31,6 +31,10 @@ public class Canal implements Serializable{
         return no_sus;
     }
 
+    public void addNo_sus(){
+        this.no_sus++;
+    }
+    
     public void setNo_sus(int no_sus) {
         this.no_sus = no_sus;
     }
