@@ -85,9 +85,9 @@ public class ReproducirPlayList extends Thread{
                         int pos=reproduccion.getValue()/10;
                         System.out.println(pos);
                         subtitulos.setText(video.getSubtitulos().get(pos));
-                        cont++;
                         System.out.println(video.getSubtitulos().get(pos));
                     }
+                    cont++;
                     reproduccion.setValue(reproduccion.getValue()+1);
                     try {
                         Thread.sleep(1000);
