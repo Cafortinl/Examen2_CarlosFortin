@@ -64,7 +64,6 @@ public class Login extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla_misvideos = new javax.swing.JTable();
-        jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jLabel20 = new javax.swing.JLabel();
         lb_nombre = new javax.swing.JLabel();
@@ -87,6 +86,7 @@ public class Login extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         pop_reproducir = new javax.swing.JPopupMenu();
@@ -109,8 +109,6 @@ public class Login extends javax.swing.JFrame {
         jLabel28 = new javax.swing.JLabel();
         lb_dislikes = new javax.swing.JLabel();
         jd_reproducirPlayList = new javax.swing.JDialog();
-        jLabel29 = new javax.swing.JLabel();
-        lb_nomPlay = new javax.swing.JLabel();
         jScrollPane9 = new javax.swing.JScrollPane();
         ta_comPlay = new javax.swing.JTextArea();
         pb_durPlay = new javax.swing.JProgressBar();
@@ -289,9 +287,12 @@ public class Login extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(Tabla_misvideos);
 
-        jButton4.setText("Ver video");
-
         jButton5.setText("Ver Favoritos");
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
 
         jLabel20.setText("Nombre:");
 
@@ -313,11 +314,8 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jButton4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton5))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
@@ -348,9 +346,7 @@ public class Login extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
+                .addComponent(jButton5)
                 .addGap(15, 15, 15))
         );
 
@@ -527,27 +523,39 @@ public class Login extends javax.swing.JFrame {
 
         tab.addTab("Subir Video", jPanel3);
 
+        jButton4.setText("Cerrar Sesion");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jd_menuLayout = new javax.swing.GroupLayout(jd_menu.getContentPane());
         jd_menu.getContentPane().setLayout(jd_menuLayout);
         jd_menuLayout.setHorizontalGroup(
             jd_menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jd_menuLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(tab, javax.swing.GroupLayout.PREFERRED_SIZE, 781, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jd_menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jd_menuLayout.createSequentialGroup()
+                        .addGap(332, 332, 332)
+                        .addComponent(jLabel15))
+                    .addGroup(jd_menuLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(jd_menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton4)
+                            .addComponent(tab, javax.swing.GroupLayout.PREFERRED_SIZE, 781, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(19, Short.MAX_VALUE))
-            .addGroup(jd_menuLayout.createSequentialGroup()
-                .addGap(332, 332, 332)
-                .addComponent(jLabel15)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jd_menuLayout.setVerticalGroup(
             jd_menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jd_menuLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jLabel15)
-                .addGap(33, 33, 33)
+                .addGap(3, 3, 3)
+                .addComponent(jButton4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tab, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -701,10 +709,6 @@ public class Login extends javax.swing.JFrame {
                 .addContainerGap(43, Short.MAX_VALUE))
         );
 
-        jLabel29.setText("Nombre:");
-
-        lb_nomPlay.setText("no_vid");
-
         ta_comPlay.setColumns(20);
         ta_comPlay.setRows(5);
         jScrollPane9.setViewportView(ta_comPlay);
@@ -742,10 +746,6 @@ public class Login extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(jd_reproducirPlayListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane9)
-                    .addGroup(jd_reproducirPlayListLayout.createSequentialGroup()
-                        .addComponent(jLabel29)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lb_nomPlay))
                     .addComponent(pb_durPlay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 889, Short.MAX_VALUE))
                 .addContainerGap(28, Short.MAX_VALUE))
@@ -753,17 +753,13 @@ public class Login extends javax.swing.JFrame {
         jd_reproducirPlayListLayout.setVerticalGroup(
             jd_reproducirPlayListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jd_reproducirPlayListLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(jd_reproducirPlayListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel29)
-                    .addComponent(lb_nomPlay))
-                .addGap(18, 18, 18)
+                .addGap(52, 52, 52)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pb_durPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1033,6 +1029,7 @@ public class Login extends javax.swing.JFrame {
             
             lb_likes.setText(Integer.toString(repro.getLikesInt()));
             lb_dislikes.setText(Integer.toString(repro.getDislikesInt()));
+            au.escribirArchivo();
         }
     }//GEN-LAST:event_jButton8MouseClicked
 
@@ -1046,6 +1043,7 @@ public class Login extends javax.swing.JFrame {
             
             lb_likes.setText(Integer.toString(repro.getLikesInt()));
             lb_dislikes.setText(Integer.toString(repro.getDislikesInt()));
+            au.escribirArchivo();
         }
     }//GEN-LAST:event_jButton9MouseClicked
 
@@ -1055,8 +1053,26 @@ public class Login extends javax.swing.JFrame {
         }else{
             actual.getFavoritos().getVideos().add(repro);
             JOptionPane.showMessageDialog(jd_reproducirVideo, "Video agregado exitosamente");
+            au.escribirArchivo();
         }
     }//GEN-LAST:event_jButton11MouseClicked
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        if(actual.getFavoritos().getVideos().isEmpty()){
+            JOptionPane.showMessageDialog(jd_menu, "No tienes videos favoritos");
+        }else{
+            rp=new ReproducirPlayList(actual.getFavoritos(), pb_durPlay, ta_comPlay, Tabla_reproducciones);
+            jd_reproducirPlayList.setVisible(true);
+            jd_reproducirPlayList.pack();
+            jd_reproducirPlayList.setLocationRelativeTo(jd_menu);
+            rp.start();
+        }
+    }//GEN-LAST:event_jButton5MouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        actual=null;
+        jd_menu.setVisible(false);
+    }//GEN-LAST:event_jButton4MouseClicked
 
     public void actualizarTablaMisVideos(){
         Tabla_misvideos.setModel(new javax.swing.table.DefaultTableModel(
@@ -1308,7 +1324,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1338,7 +1353,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTree jt_suscripciones;
     private javax.swing.JLabel lb_dislikes;
     private javax.swing.JLabel lb_likes;
-    private javax.swing.JLabel lb_nomPlay;
     private javax.swing.JLabel lb_nomVid;
     private javax.swing.JLabel lb_nombre;
     private javax.swing.JLabel lb_sus;
@@ -1370,4 +1384,5 @@ public class Login extends javax.swing.JFrame {
     DefaultMutableTreeNode root=null;
     DefaultMutableTreeNode seleccionado=null;
     ReproducirVideo rv;
+    ReproducirPlayList rp;
 }

@@ -23,7 +23,11 @@ public class PlayList implements Serializable{
     }
 
     public int getDuracion() {
-        return duracion;
+        int durac=0;
+        for (Video v : videos) {
+            durac+=v.getTiempo();
+        }
+        return durac;
     }
 
     public void setDuracion(int duracion) {
