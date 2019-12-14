@@ -104,6 +104,18 @@ public class Login extends javax.swing.JFrame {
         ta_comentarios = new javax.swing.JTextArea();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
+        jLabel22 = new javax.swing.JLabel();
+        lb_likes = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        lb_dislikes = new javax.swing.JLabel();
+        jd_reproducirPlayList = new javax.swing.JDialog();
+        jLabel29 = new javax.swing.JLabel();
+        lb_nomPlay = new javax.swing.JLabel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        ta_comPlay = new javax.swing.JTextArea();
+        pb_durPlay = new javax.swing.JProgressBar();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        Tabla_reproducciones = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -622,6 +634,14 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        jLabel22.setText("Likes:");
+
+        lb_likes.setText("likes");
+
+        jLabel28.setText("Dislikes:");
+
+        lb_dislikes.setText("dislikes");
+
         javax.swing.GroupLayout jd_reproducirVideoLayout = new javax.swing.GroupLayout(jd_reproducirVideo.getContentPane());
         jd_reproducirVideo.getContentPane().setLayout(jd_reproducirVideoLayout);
         jd_reproducirVideoLayout.setHorizontalGroup(
@@ -637,7 +657,16 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(jButton9)
                             .addGap(36, 36, 36)
                             .addComponent(jButton11))
-                        .addComponent(lb_nomVid)
+                        .addGroup(jd_reproducirVideoLayout.createSequentialGroup()
+                            .addComponent(lb_nomVid)
+                            .addGap(172, 172, 172)
+                            .addComponent(jLabel22)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(lb_likes)
+                            .addGap(46, 46, 46)
+                            .addComponent(jLabel28)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lb_dislikes))
                         .addComponent(jScrollPane6)
                         .addComponent(pb_vid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 772, Short.MAX_VALUE)
@@ -648,7 +677,12 @@ public class Login extends javax.swing.JFrame {
             jd_reproducirVideoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jd_reproducirVideoLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(lb_nomVid)
+                .addGroup(jd_reproducirVideoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lb_nomVid)
+                    .addComponent(jLabel22)
+                    .addComponent(lb_likes)
+                    .addComponent(jLabel28)
+                    .addComponent(lb_dislikes))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
@@ -665,6 +699,71 @@ public class Login extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButton10)
                 .addContainerGap(43, Short.MAX_VALUE))
+        );
+
+        jLabel29.setText("Nombre:");
+
+        lb_nomPlay.setText("no_vid");
+
+        ta_comPlay.setColumns(20);
+        ta_comPlay.setRows(5);
+        jScrollPane9.setViewportView(ta_comPlay);
+
+        Tabla_reproducciones.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Reproducciones"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane10.setViewportView(Tabla_reproducciones);
+
+        javax.swing.GroupLayout jd_reproducirPlayListLayout = new javax.swing.GroupLayout(jd_reproducirPlayList.getContentPane());
+        jd_reproducirPlayList.getContentPane().setLayout(jd_reproducirPlayListLayout);
+        jd_reproducirPlayListLayout.setHorizontalGroup(
+            jd_reproducirPlayListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_reproducirPlayListLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(jd_reproducirPlayListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane9)
+                    .addGroup(jd_reproducirPlayListLayout.createSequentialGroup()
+                        .addComponent(jLabel29)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lb_nomPlay))
+                    .addComponent(pb_durPlay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 889, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+        jd_reproducirPlayListLayout.setVerticalGroup(
+            jd_reproducirPlayListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_reproducirPlayListLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jd_reproducirPlayListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel29)
+                    .addComponent(lb_nomPlay))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(pb_durPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -911,6 +1010,8 @@ public class Login extends javax.swing.JFrame {
         jd_reproducirVideo.pack();
         jd_reproducirVideo.setLocationRelativeTo(jd_menu);
         lb_nomVid.setText(repro.getNombre());
+        lb_likes.setText(Integer.toString(repro.getLikesInt()));
+        lb_dislikes.setText(Integer.toString(repro.getDislikesInt()));
         actualizarTablaComentarios();
         rv.start();
     }//GEN-LAST:event_reproducirActionPerformed
@@ -929,6 +1030,9 @@ public class Login extends javax.swing.JFrame {
             repro.getLikes().add(actual);
             if(repro.getDislikes().contains(actual))
                 repro.getDislikes().remove(actual);
+            
+            lb_likes.setText(Integer.toString(repro.getLikesInt()));
+            lb_dislikes.setText(Integer.toString(repro.getDislikesInt()));
         }
     }//GEN-LAST:event_jButton8MouseClicked
 
@@ -939,6 +1043,9 @@ public class Login extends javax.swing.JFrame {
             repro.getDislikes().add(actual);
             if(repro.getLikes().contains(actual))
                 repro.getLikes().remove(actual);
+            
+            lb_likes.setText(Integer.toString(repro.getLikesInt()));
+            lb_dislikes.setText(Integer.toString(repro.getDislikesInt()));
         }
     }//GEN-LAST:event_jButton9MouseClicked
 
@@ -1168,6 +1275,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTable Tabla_buscarCanales;
     private javax.swing.JTable Tabla_comentarios;
     private javax.swing.JTable Tabla_misvideos;
+    private javax.swing.JTable Tabla_reproducciones;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -1193,11 +1301,14 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1210,6 +1321,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1217,14 +1329,20 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTable jTable1;
     private javax.swing.JDialog jd_menu;
     private javax.swing.JDialog jd_registro;
+    private javax.swing.JDialog jd_reproducirPlayList;
     private javax.swing.JDialog jd_reproducirVideo;
     private javax.swing.JTree jt_suscripciones;
+    private javax.swing.JLabel lb_dislikes;
+    private javax.swing.JLabel lb_likes;
+    private javax.swing.JLabel lb_nomPlay;
     private javax.swing.JLabel lb_nomVid;
     private javax.swing.JLabel lb_nombre;
     private javax.swing.JLabel lb_sus;
+    private javax.swing.JProgressBar pb_durPlay;
     private javax.swing.JProgressBar pb_vid;
     private javax.swing.JPasswordField pf_agrpassword;
     private javax.swing.JPasswordField pf_password;
@@ -1232,6 +1350,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JMenuItem reproducir;
     private javax.swing.JSpinner sp_agredad;
     private javax.swing.JSpinner sp_duracion;
+    private javax.swing.JTextArea ta_comPlay;
     private javax.swing.JTextArea ta_comentarios;
     private javax.swing.JTextArea ta_subtitulos;
     private javax.swing.JTextArea ta_subtitulosVid;

@@ -93,9 +93,10 @@ public class Video implements Serializable{
     }
 
     public void setSubtitulos(String subtitulos) {
-        String[] sub=subtitulos.split(";");
-        for(int i=0;i<=sub.length;i++){
-            this.subtitulos.add(sub[i]);
+        Scanner leer=new Scanner(subtitulos);
+        leer.useDelimiter(";");
+        while(leer.hasNext()){
+            this.subtitulos.add(leer.next());
         }
     }
 
