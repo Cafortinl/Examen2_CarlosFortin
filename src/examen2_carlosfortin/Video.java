@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 public class Video implements Serializable{
     private String nombre;
     private int tiempo;
+    private Canal canal;
     private ArrayList<Usuario> likes=new ArrayList();
     private ArrayList<Usuario> dislikes=new ArrayList();
     private ArrayList<String> comentarios=new ArrayList();
@@ -92,6 +93,16 @@ public class Video implements Serializable{
         return dislikes;
     }
 
+    public Canal getCanal() {
+        return canal;
+    }
+
+    public void setCanal(Canal canal) {
+        this.canal = canal;
+    }
+
+    
+    
     public void setSubtitulos(String subtitulos) {
         Scanner leer=new Scanner(subtitulos);
         leer.useDelimiter(";");

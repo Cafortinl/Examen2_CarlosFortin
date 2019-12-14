@@ -136,7 +136,7 @@ public class ReproducirPlayList extends Thread{
         
         DefaultTableModel m=(DefaultTableModel)reproducciones.getModel();
         for (Video r : reproducidos) {
-            String[] info={r.getNombre()};
+            String[] info={r.getNombre(),};
             m.addRow(info);
         }
         reproducciones.setModel(m);
